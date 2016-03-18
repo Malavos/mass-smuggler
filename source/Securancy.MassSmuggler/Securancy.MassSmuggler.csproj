@@ -7,8 +7,8 @@
     <ProjectGuid>{C1D7A55D-E2BC-40BA-BAF5-0132A6157E35}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Securancy.RavenDbTool</RootNamespace>
-    <AssemblyName>Securancy.RavenDbTool</AssemblyName>
+    <RootNamespace>Securancy.MassSmuggler</RootNamespace>
+    <AssemblyName>Securancy.MassSmuggler</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
