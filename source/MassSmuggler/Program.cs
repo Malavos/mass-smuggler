@@ -1,8 +1,7 @@
 ﻿using Raven.Client.Document;
-using System;
 using System.Linq;
 
-namespace Securancy.RavenDbTool
+namespace MassSmuggler
 {
     class Program
     {
@@ -17,7 +16,7 @@ namespace Securancy.RavenDbTool
                 Routines.App.Routine.Quit();
             }
 
-            Routines.Database.Routine.ExportAllDatabases();
+            Routines.Database.Routine.ExportDatabase("MyAtuna");
         }     
     }
 }

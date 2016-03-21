@@ -9,7 +9,7 @@ using Raven.Abstractions.Data;
 using Raven.Abstractions.Smuggler;
 using Raven.Smuggler;
 
-namespace Securancy.RavenDbTool.Routines.Database
+namespace MassSmuggler.Routines.Database
 {
     partial class Routine
     {

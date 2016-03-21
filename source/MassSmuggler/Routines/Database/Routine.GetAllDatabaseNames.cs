@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Securancy.RavenDbTool.Routines.Database
+namespace MassSmuggler.Routines.Database
 {
     partial class Routine
     {

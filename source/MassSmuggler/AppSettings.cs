@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Securancy.RavenDbTool
+namespace MassSmuggler
 {
     public static class AppSettings
     {
