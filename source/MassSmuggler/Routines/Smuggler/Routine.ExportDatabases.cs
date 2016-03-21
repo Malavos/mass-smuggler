@@ -20,7 +20,22 @@ namespace MassSmuggler.Routines.Smuggler
             {
                 tasks.Add(Routines.Smuggler.Routine.ExportDatabase(database, url, path));
             }
-            Task.WaitAll(tasks.ToArray());
+
+            try
+            {
+                Task.WaitAll(tasks.ToArray());
+            }
+            catch (AggregateException ex)
+            {
+                var details = ex.InnerException != null ? ex.InnerException.Message : string.Empty;
+                Routines.App.Routine.ThrowError($"{ex.Message} {details}");
+                // Do nothing?
+            }
+            catch (Exception ex)
+            {
+                var details = ex.InnerException != null ? ex.InnerException.Message : string.Empty;
+                Routines.App.Routine.ThrowErrorAndQuit($"{ex.Message} {details}");
+            }
         }
     }
 }

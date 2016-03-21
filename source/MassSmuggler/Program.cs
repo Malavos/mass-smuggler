@@ -17,7 +17,7 @@ namespace MassSmuggler
 
             // If arguments does not contain existing function show help and quit
             // When creating new functions add them to this if statement
-            if(!arguments.Contains("--export")
+            if (!arguments.Contains("--export")
                 && !arguments.Contains("--help")) Routines.App.Routine.ShowHelpAndQuit();
 
             #region export
@@ -84,7 +84,7 @@ namespace MassSmuggler
 
             #region help
 
-            if(arguments.Contains("--help"))
+            if (arguments.Contains("--help"))
             {
                 Routines.App.Routine.ShowHelpAndQuit();
             }
