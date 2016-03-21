@@ -1,5 +1,6 @@
 ﻿using Raven.Client.Document;
 using System;
+using System.IO;
 using System.Linq;
 
 namespace MassSmuggler
@@ -38,6 +39,8 @@ namespace MassSmuggler
                     try
                     {
                         path = arguments[arguments.FindIndex(a => a == "--path") + 1];
+
+                        if (!Directory.Exists(path)) Routines.App.Routine.ThrowErrorAndQuit($"The path '{path}' does not exist.");
                     }
                     catch (Exception)
                     {
