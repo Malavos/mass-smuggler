@@ -9,17 +9,17 @@ using Raven.Abstractions.Data;
 using Raven.Abstractions.Smuggler;
 using Raven.Smuggler;
 
-namespace MassSmuggler.Routines.Database
+namespace MassSmuggler.Routines.Smuggler
 {
     partial class Routine
     {
-        public static void ExportAllDatabases()
+        public static void ExportAllDatabases(string url, string path)
         {
-            var databases = Routine.GetAllDatabaseNames();
+            var databases = Routines.Server.Routine.GetAllDatabaseNames(url);
 
             foreach (var database in databases)
             {
-                Routine.ExportDatabase(database);
+                Routines.Smuggler.Routine.ExportDatabase(database, url, path);
             }
         }
     }

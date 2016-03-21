@@ -10,27 +10,27 @@ using Raven.Abstractions.Smuggler;
 using Raven.Smuggler;
 using System.IO;
 
-namespace MassSmuggler.Routines.Database
+namespace MassSmuggler.Routines.Smuggler
 {
     partial class Routine
     {
-        public static void ExportDatabase(string database)
+        public static void ExportDatabase(string database, string url, string path)
         {
             var smugglerApi = new SmugglerDatabaseApi(new SmugglerDatabaseOptions
             {
                 OperateOnTypes = ItemType.Documents | ItemType.Indexes | ItemType.Attachments | ItemType.Transformers,
                 Incremental = false
             });
-            var exportOptions = new SmugglerExportOptions<RavenConnectionStringOptions>
+            var options = new SmugglerExportOptions<RavenConnectionStringOptions>
             {
-                ToFile = Path.Combine(AppSettings.ExportPath, $"{database}_{DateTime.Now.ToString("dd_MM_yyyy_HH_mm")}.ravendump"),
+                ToFile = Path.Combine(path, $"{database}_{DateTime.Now.ToString("dd_MM_yyyy_HH_mm")}.ravendump"),
                 From = new RavenConnectionStringOptions
                 {
                     DefaultDatabase = database,
-                    Url = AppSettings.DataBaseServerUrl
+                    Url = url
                 }
             };
-            smugglerApi.ExportData(exportOptions);
+            smugglerApi.ExportData(options);
         }
     }
 }

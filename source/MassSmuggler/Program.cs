@@ -1,4 +1,5 @@
 ﻿using Raven.Client.Document;
+using System;
 using System.Linq;
 
 namespace MassSmuggler
@@ -6,17 +7,56 @@ namespace MassSmuggler
     class Program
     {
         private static DocumentStore DocumentStore { get; set; }
-        private static string DatabaseUrl { get; set; }
 
         static void Main(string[] args)
         {
-            if (args.Contains("all"))
+            var arguments = args.ToList();
+
+            if (arguments.Contains("--all"))
             {
-                Routines.Database.Routine.ExportAllDatabases();
-                Routines.App.Routine.Quit();
+                var url = string.Empty;
+                var path = string.Empty;
+
+                if (arguments.Contains("--url"))
+                {
+                    try
+                    {
+                        url = arguments[arguments.FindIndex(a => a == "--url") + 1];
+                    }
+                    catch (Exception)
+                    {
+                        Routines.App.Routine.ThrowError("Please provide a value to database server url argument; --url <value>");
+                    }
+                }
+                else
+                {
+                    Routines.App.Routine.ThrowError("Please provide a database server url argument; --url");
+                }
+
+                if (arguments.Contains("--path"))
+                {
+                    try
+                    {
+                        path = arguments[arguments.FindIndex(a => a == "--path") + 1];
+                    }
+                    catch (Exception)
+                    {
+                        Routines.App.Routine.ThrowError("Please provide a value to the export path argument; --path <value>");
+                    }
+                }
+                else
+                {
+                    Routines.App.Routine.ThrowError("Please provide a export path argument; --path");
+                }
+
+                Console.WriteLine(url);
+                Console.WriteLine(path);
+
+                Routines.Smuggler.Routine.ExportAllDatabases(url, path);
             }
 
-            Routines.Database.Routine.ExportDatabase("MyAtuna");
-        }     
+            Console.ReadKey();
+        }
     }
 }
+
