@@ -8,11 +8,12 @@ namespace MassSmuggler.Routines.App
 {
     partial class Routine
     {
-		public static void ThrowError(string message)
+		public static void ThrowErrorAndQuit(string message)
 		{
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine(message);
             Console.ResetColor();
+            Routines.App.Routine.Quit();
         }
     }
 }
