@@ -25,12 +25,12 @@ namespace MassSmuggler
                     }
                     catch (Exception)
                     {
-                        Routines.App.Routine.ThrowError("Please provide a value to database server url argument; --url <value>");
+                        Routines.App.Routine.ThrowErrorAndQuit("Please provide a value to database server url argument; --url <value>");
                     }
                 }
                 else
                 {
-                    Routines.App.Routine.ThrowError("Please provide a database server url argument; --url");
+                    Routines.App.Routine.ThrowErrorAndQuit("Please provide a database server url argument; --url");
                 }
 
                 if (arguments.Contains("--path"))
@@ -41,12 +41,12 @@ namespace MassSmuggler
                     }
                     catch (Exception)
                     {
-                        Routines.App.Routine.ThrowError("Please provide a value to the export path argument; --path <value>");
+                        Routines.App.Routine.ThrowErrorAndQuit("Please provide a value to the export path argument; --path <value>");
                     }
                 }
                 else
                 {
-                    Routines.App.Routine.ThrowError("Please provide a export path argument; --path");
+                    Routines.App.Routine.ThrowErrorAndQuit("Please provide a export path argument; --path");
                 }
 
                 Routines.Smuggler.Routine.ExportAllDatabases(url, path);
