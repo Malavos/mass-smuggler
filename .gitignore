@@ -154,7 +154,6 @@ $RECYCLE.BIN/
 
 # Package Manager excludes, such as NPM and Bower
 node_modules
-dist
 .tmp
 .sass-cache
 bower_components
