@@ -6,13 +6,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MassSmuggler.Routines.Database
+namespace MassSmuggler.Routines.Server
 {
     partial class Routine
     {
-        public static List<string> GetAllDatabaseNames()
+        private static DocumentStore DocumentStore { get; set; }
+
+        public static List<string> GetAllDatabaseNames(string url)
         {
-            return AppSettings.DocumentStore
+            DocumentStore = new DocumentStore { Url = url };
+            DocumentStore.Initialize();
+            return DocumentStore
                     .DatabaseCommands
                     .GlobalAdmin
                     .GetDatabaseNames(1024, 0)
