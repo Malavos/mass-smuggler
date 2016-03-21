@@ -49,9 +49,6 @@ namespace MassSmuggler
                     Routines.App.Routine.ThrowError("Please provide a export path argument; --path");
                 }
 
-                Console.WriteLine(url);
-                Console.WriteLine(path);
-
                 Routines.Smuggler.Routine.ExportAllDatabases(url, path);
             }
 
