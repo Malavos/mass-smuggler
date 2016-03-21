@@ -14,13 +14,22 @@ namespace MassSmuggler.Routines.Server
 
         public static List<string> GetAllDatabaseNames(string url)
         {
-            DocumentStore = new DocumentStore { Url = url };
-            DocumentStore.Initialize();
-            return DocumentStore
-                    .DatabaseCommands
-                    .GlobalAdmin
-                    .GetDatabaseNames(1024, 0)
-                    .ToList();
+            try
+            {
+                DocumentStore = new DocumentStore { Url = url };
+                DocumentStore.Initialize();
+                return DocumentStore
+                        .DatabaseCommands
+                        .GlobalAdmin
+                        .GetDatabaseNames(1024, 0)
+                        .ToList();
+            }
+            catch (Exception ex)
+            {
+                var details = ex.InnerException != null ? ex.InnerException.Message : string.Empty; 
+                Routines.App.Routine.ThrowErrorAndQuit($"{ex.Message} {details}");
+                return null;
+            }          
         }
     }
 }
