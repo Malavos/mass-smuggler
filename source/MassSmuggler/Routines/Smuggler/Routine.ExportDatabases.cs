@@ -13,14 +13,14 @@ namespace MassSmuggler.Routines.Smuggler
 {
     partial class Routine
     {
-        public static void ExportAllDatabases(string url, string path)
+        public static void ExportDatabases(string url, string path, List<string> databases)
         {
-            var databases = Routines.Server.Routine.GetAllDatabaseNames(url);
-
+            var tasks = new List<Task>();
             foreach (var database in databases)
             {
-                Routines.Smuggler.Routine.ExportDatabase(database, url, path);
+                tasks.Add(Routines.Smuggler.Routine.ExportDatabase(database, url, path));
             }
+            Task.WaitAll(tasks.ToArray());
         }
     }
 }

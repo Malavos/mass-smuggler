@@ -14,7 +14,7 @@ namespace MassSmuggler.Routines.Smuggler
 {
     partial class Routine
     {
-        public static void ExportDatabase(string database, string url, string path)
+        public static async Task ExportDatabase(string database, string url, string path)
         {
             var smugglerApi = new SmugglerDatabaseApi(new SmugglerDatabaseOptions
             {
@@ -30,7 +30,7 @@ namespace MassSmuggler.Routines.Smuggler
                     Url = url
                 }
             };
-            smugglerApi.ExportData(options);
+            await smugglerApi.ExportData(options);
         }
     }
 }
