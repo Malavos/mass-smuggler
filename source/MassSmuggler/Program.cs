@@ -102,7 +102,7 @@ namespace MassSmuggler
                         Routines.App.Routine.ShowHelpAndQuit();
                     }
 
-                    Log.Error($"[smuggler/export/all] Starting backup of all database");
+                    Log.Information($"[smuggler/export/all] Starting backup of all databases");
                     var databases = Routines.Server.Routine.GetAllDatabaseNames(url);
                     Routines.Smuggler.Routine.ExportDatabases(url, path, databases);
                     Log.Information($"[smuggler/export/all/] Database backups are complete..");
