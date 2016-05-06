@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Serilog;
 
 namespace MassSmuggler.Routines.Server
 {
@@ -16,6 +17,7 @@ namespace MassSmuggler.Routines.Server
         {
             try
             {
+                Log.Information($"[smuggler/export/alldatabases] Fetching database names");
                 DocumentStore = new DocumentStore { Url = url };
                 DocumentStore.Initialize();
                 return DocumentStore
@@ -26,7 +28,8 @@ namespace MassSmuggler.Routines.Server
             }
             catch (Exception ex)
             {
-                var details = ex.InnerException != null ? ex.InnerException.Message : string.Empty; 
+                var details = ex.InnerException != null ? ex.InnerException.Message : string.Empty;
+                Log.Error($"[smuggler/export/alldatabases] Failed to fetch database names {ex.Message}; {details}");
                 Routines.App.Routine.ThrowErrorAndQuit($"{ex.Message} {details}");
                 return null;
             }          

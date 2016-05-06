@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Raven.Abstractions.Data;
 using Raven.Abstractions.Smuggler;
 using Raven.Smuggler;
+using Serilog;
 
 namespace MassSmuggler.Routines.Smuggler
 {
@@ -18,11 +19,21 @@ namespace MassSmuggler.Routines.Smuggler
             var tasks = new List<Task>();
             foreach (var database in databases)
             {
-                tasks.Add(Routines.Smuggler.Routine.ExportDatabase(database, url, path));
+                try
+                {
+                    tasks.Add(Routines.Smuggler.Routine.ExportDatabase(database, url, path));
+                }
+                catch (Exception ex)
+                {
+                    var details = ex.InnerException != null ? ex.InnerException.Message : string.Empty;
+                    Log.Error($"[smuggler/export/exportdatabases] Failed to create backup task for database '{database}'; {ex.Message}; {details}");
+                    Routines.App.Routine.ThrowErrorAndQuit($"{ex.Message} {details}");
+                }
             }
 
             try
             {
+                Log.Information($"[smuggler/export/exportdatabases] Executing all backup tasks..");
                 Task.WaitAll(tasks.ToArray());
             }
             catch (AggregateException ex)
@@ -34,6 +45,7 @@ namespace MassSmuggler.Routines.Smuggler
             catch (Exception ex)
             {
                 var details = ex.InnerException != null ? ex.InnerException.Message : string.Empty;
+                Log.Error($"[smuggler/export/exportdatabases] Failed to execute backup tasks {ex.Message}; {details}");
                 Routines.App.Routine.ThrowErrorAndQuit($"{ex.Message} {details}");
             }
         }
