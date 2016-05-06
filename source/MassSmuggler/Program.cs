@@ -22,11 +22,15 @@ namespace MassSmuggler
                 throw new Exception($"Failed to register logger {ex.Message}");
             }
 
+            Log.Information("[smuggler] Booting.");
+
             var arguments = args.ToList();
 
-            if (!arguments.Any()) Routines.App.Routine.ShowHelpAndQuit();
-
-            Log.Information("[smuggler] Booting.");
+            if (!arguments.Any())
+            {
+                Log.Information("[smuggler] No arguments found.");
+                Routines.App.Routine.ShowHelpAndQuit();
+            }
 
             // If arguments does not contain existing function show help and quit
             // When creating new functions add them to this if statement
