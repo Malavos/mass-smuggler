@@ -16,6 +16,10 @@ namespace MassSmuggler.Routines.Smuggler
     {
         public static async Task ExportDatabase(string database, string url, string path)
         {
+            // Create database back up folder if it does not exists
+            if (!Directory.Exists(Path.Combine(path, database)))
+                Directory.CreateDirectory(Path.Combine(path, database));
+
             var smugglerApi = new SmugglerDatabaseApi(new SmugglerDatabaseOptions
             {
                 OperateOnTypes = ItemType.Documents | ItemType.Indexes | ItemType.Attachments | ItemType.Transformers,
@@ -23,7 +27,8 @@ namespace MassSmuggler.Routines.Smuggler
             });
             var options = new SmugglerExportOptions<RavenConnectionStringOptions>
             {
-                ToFile = Path.Combine(path, $"{database}_{DateTime.Now.ToString("dd_MM_yyyy_HH_mm")}.ravendump"),
+                ToFile = Path.Combine($"{path}/{database}", $"{database}_{DateTime.Now.ToString("dd_MM_yyyy_HH_mm")}.ravendump"),
+
                 From = new RavenConnectionStringOptions
                 {
                     DefaultDatabase = database,
