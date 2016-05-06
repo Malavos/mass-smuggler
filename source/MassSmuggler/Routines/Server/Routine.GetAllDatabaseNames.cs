@@ -17,7 +17,7 @@ namespace MassSmuggler.Routines.Server
         {
             try
             {
-                Log.Information($"[smuggler/export/alldatabases] Fetching database names");
+                Log.Information($"[smuggler/routine/getalldatabasenames] Fetching database names");
                 DocumentStore = new DocumentStore { Url = url };
                 DocumentStore.Initialize();
                 return DocumentStore
@@ -29,7 +29,7 @@ namespace MassSmuggler.Routines.Server
             catch (Exception ex)
             {
                 var details = ex.InnerException != null ? ex.InnerException.Message : string.Empty;
-                Log.Error($"[smuggler/export/alldatabases] Failed to fetch database names {ex.Message}; {details}");
+                Log.Error($"[smuggler/routine/getalldatabasenames] Failed to fetch database names {ex.Message}; {details}");
                 Routines.App.Routine.ThrowErrorAndQuit($"{ex.Message} {details}");
                 return null;
             }          

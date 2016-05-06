@@ -17,7 +17,7 @@ namespace MassSmuggler.Routines.Smuggler
     {
         public static async Task ExportDatabase(string database, string url, string path)
         {
-            Log.Information($"[smuggler/export/exportdatabase] Creating backup task for database '{database}'");
+            Log.Information($"[smuggler/routine/exportdatabase] Creating backup task for database '{database}'");
 
             // Create database back up folder if it does not exists
             if (!Directory.Exists(Path.Combine(path, database)))
@@ -39,8 +39,6 @@ namespace MassSmuggler.Routines.Smuggler
                 }
             };
             await smugglerApi.ExportData(options);
-
-            Log.Information($"[smuggler/export/exportdatabase] Created backup task for database '{database}'");
         }
     }
 }

@@ -55,18 +55,18 @@ namespace MassSmuggler
                         try
                         {
                             url = arguments[arguments.FindIndex(a => a == "--url") + 1];
-                            Log.Information($"[smuggler/export/alldatabases] Found database server url: {url}");
+                            Log.Information($"[smuggler/export/all] Found database server url: {url}");
                         }
                         catch (Exception)
                         {
-                            Log.Error($"[smuggler/export/alldatabases] Failed to find database url");
+                            Log.Error($"[smuggler/export/all] Failed to find database url");
                             Routines.App.Routine.ThrowError("Please provide a value to database server url argument; --url <value>");
                             Routines.App.Routine.ShowHelpAndQuit();
                         }
                     }
                     else
                     {
-                        Log.Error($"[smuggler/export/alldatabases] Failed to find argument for database url");
+                        Log.Error($"[smuggler/export/all] Failed to find argument for database url");
                         Routines.App.Routine.ThrowError("Please provide a database server url argument; --url");
                         Routines.App.Routine.ShowHelpAndQuit();
                     }
@@ -76,32 +76,32 @@ namespace MassSmuggler
                         try
                         {
                             path = arguments[arguments.FindIndex(a => a == "--path") + 1];
-                            Log.Information($"[smuggler/export/alldatabases] Found back up path: {path}");
+                            Log.Information($"[smuggler/export/all] Found back up path: {path}");
 
                             if (!Directory.Exists(path))
                             {
-                                Log.Error($"[smuggler/export/alldatabases] Provided backup directory does not exists {path}");
+                                Log.Error($"[smuggler/export/all] Provided backup directory does not exists {path}");
                                 Routines.App.Routine.ThrowError($"The path '{path}' does not exist.");
                             }
                         }
                         catch (Exception)
                         {
-                            Log.Error($"[smuggler/export/alldatabases] Failed to find backup path");
+                            Log.Error($"[smuggler/export/all] Failed to find backup path");
                             Routines.App.Routine.ThrowError("Please provide a value to the export path argument; --path <value>");
                             Routines.App.Routine.ShowHelpAndQuit();
                         }
                     }
                     else
                     {
-                        Log.Error($"[smuggler/export/alldatabases] Failed to backup path argument");
+                        Log.Error($"[smuggler/export/all] Failed to backup path argument");
                         Routines.App.Routine.ThrowError("Please provide a export path argument; --path");
                         Routines.App.Routine.ShowHelpAndQuit();
                     }
 
-                    Log.Error($"[smuggler/export/alldatabases] Starting backup of all database");
+                    Log.Error($"[smuggler/export/all] Starting backup of all database");
                     var databases = Routines.Server.Routine.GetAllDatabaseNames(url);
                     Routines.Smuggler.Routine.ExportDatabases(url, path, databases);
-                    Log.Information($"[smuggler/export/exportdatabases] Database backups are complete..");
+                    Log.Information($"[smuggler/export/all/] Database backups are complete..");
                 }
                 else
                 {

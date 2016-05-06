@@ -26,14 +26,14 @@ namespace MassSmuggler.Routines.Smuggler
                 catch (Exception ex)
                 {
                     var details = ex.InnerException != null ? ex.InnerException.Message : string.Empty;
-                    Log.Error($"[smuggler/export/exportdatabases] Failed to create backup task for database '{database}'; {ex.Message}; {details}");
+                    Log.Error($"[smuggler/routine/exportdatabases] Failed to create backup task for database '{database}'; {ex.Message}; {details}");
                     Routines.App.Routine.ThrowErrorAndQuit($"{ex.Message} {details}");
                 }
             }
 
             try
             {
-                Log.Information($"[smuggler/export/exportdatabases] Executing all backup tasks..");
+                Log.Information($"[smuggler/routine/exportdatabases] Executing all backup tasks..");
                 Task.WaitAll(tasks.ToArray());
             }
             catch (AggregateException ex)
@@ -45,7 +45,7 @@ namespace MassSmuggler.Routines.Smuggler
             catch (Exception ex)
             {
                 var details = ex.InnerException != null ? ex.InnerException.Message : string.Empty;
-                Log.Error($"[smuggler/export/exportdatabases] Failed to execute backup tasks {ex.Message}; {details}");
+                Log.Error($"[smuggler/routine/exportdatabases] Failed to execute backup tasks {ex.Message}; {details}");
                 Routines.App.Routine.ThrowErrorAndQuit($"{ex.Message} {details}");
             }
         }
