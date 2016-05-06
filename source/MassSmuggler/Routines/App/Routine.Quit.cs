@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Serilog;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +11,8 @@ namespace MassSmuggler.Routines.App
     {
 		public static void Quit()
 		{
-			Environment.Exit(0);
+            Log.Information("[smuggler] Shutting down.");
+            Environment.Exit(0);
 		}
     }
 }

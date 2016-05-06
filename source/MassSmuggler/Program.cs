@@ -93,7 +93,7 @@ namespace MassSmuggler
                     }
                     else
                     {
-                        Log.Error($"[smuggler/export/all] Failed to backup path argument");
+                        Log.Error($"[smuggler/export/all] Failed to find backup path argument");
                         Routines.App.Routine.ThrowError("Please provide a export path argument; --path");
                         Routines.App.Routine.ShowHelpAndQuit();
                     }
